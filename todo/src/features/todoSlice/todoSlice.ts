@@ -14,9 +14,13 @@ export const todoSlice = createSlice({
     addTodo: (state, action: PayloadAction<Todo>) => {
       state.value.push(action.payload);
     },
+    // App will receive todo ID, to be removed from collection.
+    removeTodo: (state, action: PayloadAction<string>) => {
+      state.value = state.value.filter((todo) => todo.id !== action.payload);
+    },
   },
 });
 
-export const {} = todoSlice.actions;
+export const { addTodo } = todoSlice.actions;
 
 export const todosSliceReducer = todoSlice.reducer;

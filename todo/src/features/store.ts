@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { todosSliceReducer } from "./todoSlice/todoSlice";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: { todos: todosSliceReducer },
 });
 
 // Needed for typing our state and dispatch functions anytime they're used in our application.
