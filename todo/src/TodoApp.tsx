@@ -1,19 +1,7 @@
 import "./index.css";
 import { useState } from "react";
-import styled from "styled-components";
 import { AddTodoForm } from "./components/AddTodoForm";
-
-const TodoAppWrapper = styled.div`
-  min-height: 100vh;
-  min-width: 100vw;
-
-  background-color: gray;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+import { TodoAppWrapper } from "./components/styled/TodoApp.styled";
 
 export const TodoApp = () => {
   const [showForm, setShowForm] = useState<boolean>(false);
