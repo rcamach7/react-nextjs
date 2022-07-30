@@ -5,7 +5,11 @@ import { v4 } from "uuid";
 import { useAppDispatch } from "../features/typedHooks";
 import { addTodo } from "../features/todoSlice/todoSlice";
 
-export const AddTodoForm = () => {
+interface Props {
+  toggleShowForm: () => void;
+}
+
+export const AddTodoForm: React.FC<Props> = ({ toggleShowForm }) => {
   const [formInput, setFormInput] = useState<TodoFormInput>({
     title: "",
     description: "",
@@ -20,12 +24,11 @@ export const AddTodoForm = () => {
       ...formInput,
       id: v4(),
       done: false,
-      date: new Date(formInput.date),
+      date: formInput.date,
     };
 
-    console.log(todo);
-
     dispatch(addTodo(todo));
+    toggleShowForm();
   };
 
   const handleInputChange = (
@@ -63,12 +66,14 @@ export const AddTodoForm = () => {
           placeholder="note title"
           name="title"
           onChange={(e) => handleInputChange(e)}
+          required
         />
         <textarea
           value={formInput.description}
           placeholder="description"
           name="description"
           onChange={(e) => handleInputChange(e)}
+          required
         />
         <input
           value={formInput.date}
@@ -82,6 +87,7 @@ export const AddTodoForm = () => {
           onChange={(e) => {
             handleSelectChange(e);
           }}
+          required
         >
           <option value="normal">Normal</option>
           <option value="important">Important</option>

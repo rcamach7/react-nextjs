@@ -24,7 +24,7 @@ export const TodoApp = () => {
     <TodoAppWrapper>
       <button onClick={() => toggleShowForm()}>Show Form</button>
 
-      {showForm && <AddTodoForm />}
+      {showForm && <AddTodoForm toggleShowForm={toggleShowForm} />}
     </TodoAppWrapper>
   );
 };
