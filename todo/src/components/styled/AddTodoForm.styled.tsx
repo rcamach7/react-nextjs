@@ -17,12 +17,31 @@ export const AddTodoFormWrapper = styled.div`
   form {
     padding: 10px;
     background-color: white;
-    outline: auto;
+    border-radius: 10px;
+    border: solid black 2px;
 
     text-align: center;
 
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
+    .title {
+      display: flex;
+      justify-content: space-between;
+      p {
+        font-weight: bold;
+      }
+      button {
+        padding: 0 5px;
+      }
+    }
+    .selectContainer {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      .subTitle {
+        font-size: 14px;
+      }
+    }
   }
 `;

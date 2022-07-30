@@ -57,20 +57,29 @@ export const AddTodoForm: React.FC<Props> = ({ toggleShowForm }) => {
   };
 
   return (
-    <AddTodoFormWrapper>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <p>Add Todo Form</p>
+    <AddTodoFormWrapper onClick={() => toggleShowForm()}>
+      <form
+        onSubmit={(e) => handleSubmit(e)}
+        // Prevents any eventListeners to trigger on parent components.
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="title">
+          <p className="text">Create Todo</p>
+          <button className="closeBtn" onClick={() => toggleShowForm()}>
+            X
+          </button>
+        </div>
         <input
           value={formInput.title}
           type="text"
-          placeholder="note title"
+          placeholder="Title"
           name="title"
           onChange={(e) => handleInputChange(e)}
           required
         />
         <textarea
           value={formInput.description}
-          placeholder="description"
+          placeholder="Description"
           name="description"
           onChange={(e) => handleInputChange(e)}
           required
@@ -81,17 +90,20 @@ export const AddTodoForm: React.FC<Props> = ({ toggleShowForm }) => {
           name="date"
           onChange={(e) => handleInputChange(e)}
         />
-        <select
-          name="priority"
-          defaultChecked
-          onChange={(e) => {
-            handleSelectChange(e);
-          }}
-          required
-        >
-          <option value="normal">Normal</option>
-          <option value="important">Important</option>
-        </select>
+        <div className="selectContainer">
+          <p className="subTitle">Priority :</p>
+          <select
+            name="priority"
+            defaultChecked
+            onChange={(e) => {
+              handleSelectChange(e);
+            }}
+            required
+          >
+            <option value="normal">normal</option>
+            <option value="important">important</option>
+          </select>
+        </div>
 
         <input type="submit" />
       </form>
