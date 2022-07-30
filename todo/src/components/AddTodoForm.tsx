@@ -1,17 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AddTodoFormWrapper } from "./styled/AddTodoForm.styled";
+import { Todo, TodoFormInput } from "../features/store.models";
 import { v4 } from "uuid";
+import { useAppDispatch } from "../features/typedHooks";
+import { addTodo } from "../features/todoSlice/todoSlice";
 
 export const AddTodoForm = () => {
-  const [formInput, setFormInput] = useState({
+  const [formInput, setFormInput] = useState<TodoFormInput>({
     title: "",
     description: "",
     priority: "normal",
     date: "",
   });
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const todo: Todo = {
+      ...formInput,
+      id: v4(),
+      done: false,
+      date: new Date(formInput.date),
+    };
+
+    console.log(todo);
+
+    dispatch(addTodo(todo));
   };
 
   const handleInputChange = (
