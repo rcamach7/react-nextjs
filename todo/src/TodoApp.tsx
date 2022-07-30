@@ -1,7 +1,7 @@
 import "./index.css";
 import { useState } from "react";
 import styled from "styled-components";
-import { AddTodoForm } from "./components/styled/AddTodoForm";
+import { AddTodoForm } from "./components/AddTodoForm";
 
 const TodoAppWrapper = styled.div`
   min-height: 100vh;
