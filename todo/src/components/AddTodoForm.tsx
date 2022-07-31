@@ -56,6 +56,11 @@ export const AddTodoForm: React.FC<Props> = ({ toggleShowForm }) => {
     });
   };
 
+  const closeForm = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    toggleShowForm();
+  };
+
   return (
     <AddTodoFormWrapper onClick={() => toggleShowForm()}>
       <form
@@ -65,7 +70,7 @@ export const AddTodoForm: React.FC<Props> = ({ toggleShowForm }) => {
       >
         <div className="title">
           <p className="text">Create Todo</p>
-          <button className="closeBtn" onClick={() => toggleShowForm()}>
+          <button className="closeBtn" onClick={(e) => closeForm(e)}>
             X
           </button>
         </div>
