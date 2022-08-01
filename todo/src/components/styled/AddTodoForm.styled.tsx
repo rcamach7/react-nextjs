@@ -25,6 +25,10 @@ export const AddTodoFormWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
+    input,
+    textarea {
+      padding: 0 0 0 5px;
+    }
     .title {
       display: flex;
       justify-content: space-between;

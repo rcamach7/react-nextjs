@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AddTodoFormWrapper } from "./styled/AddTodoForm.styled";
-import { Todo, TodoFormInput } from "../features/store.models";
+import { Todo, TodoFormInput, PriorityType } from "../features/store.models";
 import { v4 } from "uuid";
 import { useAppDispatch } from "../features/typedHooks";
 import { addTodo } from "../features/todoSlice/todoSlice";
@@ -13,7 +13,7 @@ export const AddTodoForm: React.FC<Props> = ({ toggleShowForm }) => {
   const [formInput, setFormInput] = useState<TodoFormInput>({
     title: "",
     description: "",
-    priority: "normal",
+    priority: PriorityType.Normal,
     date: "",
   });
   const dispatch = useAppDispatch();
@@ -51,7 +51,10 @@ export const AddTodoForm: React.FC<Props> = ({ toggleShowForm }) => {
     setFormInput((FI) => {
       return {
         ...FI,
-        [name]: options[selectedIndex].textContent,
+        [name]:
+          options[selectedIndex].textContent === "important"
+            ? PriorityType.Important
+            : PriorityType.Normal,
       };
     });
   };
