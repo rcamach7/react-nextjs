@@ -1,5 +1,5 @@
 import "./index.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AddTodoForm } from "./components/AddTodoForm";
 import { NavBar } from "./components/NavBar";
 import { TodoAppWrapper } from "./components/styled/TodoApp.styled";
@@ -10,6 +10,10 @@ export const TodoApp = () => {
   const todos = useAppSelector((state) => state.todos.value);
 
   const toggleShowForm = () => setShowForm((sf) => !sf);
+
+  useEffect(() => {
+    localStorage.setItem("myTodos", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <TodoAppWrapper>

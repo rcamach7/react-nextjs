@@ -5,7 +5,11 @@ interface TodosState {
   value: Todo[];
 }
 
-const initialState: TodosState = { value: [] };
+// Pulls saved Todo's in local storage (if any).
+const savedTodos = localStorage.getItem("myTodos");
+const initialState: TodosState = {
+  value: savedTodos ? JSON.parse(savedTodos) : [],
+};
 
 export const todoSlice = createSlice({
   name: "Todos",
@@ -18,9 +22,12 @@ export const todoSlice = createSlice({
     removeTodo: (state, action: PayloadAction<string>) => {
       state.value = state.value.filter((todo) => todo.id !== action.payload);
     },
+    setTodos: (state, action: PayloadAction<Todo[]>) => {
+      state.value = action.payload;
+    },
   },
 });
 
-export const { addTodo } = todoSlice.actions;
+export const { addTodo, removeTodo, setTodos } = todoSlice.actions;
 
 export const todosSliceReducer = todoSlice.reducer;
