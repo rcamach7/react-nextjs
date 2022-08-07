@@ -1,44 +1,29 @@
 import styled from "styled-components";
 import { PriorityType, Todo } from "../features/store.models";
 import { MdWarning } from "react-icons/md";
+import { format } from "date-fns";
+import { useAppDispatch } from "../features/typedHooks";
+import { updateTodo } from "../features/todoSlice/todoSlice";
+import { TodoWrapper } from "./styled/TodoCard.styled";
 
 interface Props {
   todo: Todo;
 }
 
-const TodoWrapper = styled.div`
-  height: 50px;
-  width: 300px;
-  padding: 5px 10px;
-
-  background-color: white;
-  display: flex;
-  align-items: center;
-  .todoInfo {
-    padding-left: 10px;
-    flex: 2;
-    .description {
-      font-size: 12px;
-    }
-  }
-  .date {
-    padding-right: 5px;
-  }
-`;
-
 export const TodoCard: React.FC<Props> = ({ todo }) => {
   const { date, description, done, id, priority, title } = todo;
+  const dispatch = useAppDispatch();
 
   return (
     <TodoWrapper>
-      <input type="checkbox" className="checkbox" />
+      <input type="checkbox" className="checkbox" checked={done} />
 
       <div className="todoInfo">
         <p>{title}</p>
         <p className="description">{description}</p>
       </div>
 
-      <span className="date">{date}</span>
+      <span className="date">{format(new Date(date), "MM/dd")}</span>
 
       <div className="priority">
         {priority === PriorityType.Important ? (
@@ -46,6 +31,11 @@ export const TodoCard: React.FC<Props> = ({ todo }) => {
         ) : (
           <MdWarning />
         )}
+      </div>
+
+      <div className="interactButtons">
+        <button id="edit">Edit</button>
+        <button id="delete">Delete</button>
       </div>
     </TodoWrapper>
   );
