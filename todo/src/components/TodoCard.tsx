@@ -4,6 +4,8 @@ import { format } from "date-fns";
 import { useAppDispatch } from "../features/typedHooks";
 import { updateTodo, removeTodo } from "../features/todoSlice/todoSlice";
 import { TodoWrapper } from "./styled/TodoCard.styled";
+import { useState } from "react";
+import { AddTodoForm } from "./AddTodoForm";
 
 interface Props {
   todo: Todo;
@@ -11,6 +13,7 @@ interface Props {
 
 export const TodoCard: React.FC<Props> = ({ todo }) => {
   const { date, description, done, id, priority, title } = todo;
+  const [showForm, setShowForm] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
   const handleDone = () => {
@@ -47,11 +50,20 @@ export const TodoCard: React.FC<Props> = ({ todo }) => {
       </div>
 
       <div className="interactButtons">
-        <button id="edit">Edit</button>
+        <button id="edit" onClick={() => setShowForm((SF) => !SF)}>
+          Edit
+        </button>
         <button id="delete" onClick={() => dispatch(removeTodo(id))}>
           Delete
         </button>
       </div>
+
+      {showForm && (
+        <AddTodoForm
+          todo={todo}
+          toggleShowForm={() => setShowForm((SF) => !SF)}
+        />
+      )}
     </TodoWrapper>
   );
 };

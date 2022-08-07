@@ -3,31 +3,41 @@ import { AddTodoFormWrapper } from "./styled/AddTodoForm.styled";
 import { Todo, TodoFormInput, PriorityType } from "../features/store.models";
 import { v4 } from "uuid";
 import { useAppDispatch } from "../features/typedHooks";
-import { addTodo } from "../features/todoSlice/todoSlice";
+import { addTodo, updateTodo } from "../features/todoSlice/todoSlice";
 
 interface Props {
   toggleShowForm: () => void;
+  todo?: Todo;
 }
 
-export const AddTodoForm: React.FC<Props> = ({ toggleShowForm }) => {
+export const AddTodoForm: React.FC<Props> = ({ toggleShowForm, todo }) => {
   const [formInput, setFormInput] = useState<TodoFormInput>({
-    title: "",
-    description: "",
-    priority: PriorityType.Normal,
-    date: "",
+    title: todo ? todo.title : "",
+    description: todo ? todo.description : "",
+    priority: todo ? todo.priority : PriorityType.Normal,
+    date: todo ? todo.date : "",
   });
   const dispatch = useAppDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const todo: Todo = {
-      ...formInput,
-      id: v4(),
-      done: false,
-      date: formInput.date,
-    };
 
-    dispatch(addTodo(todo));
+    if (todo) {
+      const updatedTodo: Todo = {
+        ...formInput,
+        id: todo.id,
+        done: todo.done,
+      };
+      dispatch(updateTodo({ id: todo.id, todo: updatedTodo }));
+    } else {
+      const todo: Todo = {
+        ...formInput,
+        id: v4(),
+        done: false,
+      };
+
+      dispatch(addTodo(todo));
+    }
     toggleShowForm();
   };
 
