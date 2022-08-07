@@ -2,8 +2,12 @@ import "./index.css";
 import { useState, useEffect } from "react";
 import { AddTodoForm } from "./components/AddTodoForm";
 import { NavBar } from "./components/NavBar";
-import { TodoAppWrapper } from "./components/styled/TodoApp.styled";
+import {
+  TodoAppWrapper,
+  TodosContainer,
+} from "./components/styled/TodoApp.styled";
 import { useAppSelector } from "./features/typedHooks";
+import { TodoCard } from "./components/TodoCard";
 
 export const TodoApp = () => {
   const [showForm, setShowForm] = useState<boolean>(false);
@@ -19,11 +23,11 @@ export const TodoApp = () => {
     <TodoAppWrapper>
       <NavBar toggleShowForm={toggleShowForm} />
 
-      <div className="todosContainer">
+      <TodosContainer>
         {todos.map((todo) => {
-          return <div key={todo.id}>{todo.title}</div>;
+          return <TodoCard key={todo.id} todo={todo} />;
         })}
-      </div>
+      </TodosContainer>
 
       {showForm && <AddTodoForm toggleShowForm={toggleShowForm} />}
     </TodoAppWrapper>

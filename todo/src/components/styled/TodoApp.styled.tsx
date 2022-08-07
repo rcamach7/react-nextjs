@@ -8,11 +8,6 @@ export const TodoAppWrapper = styled.div`
 
   display: flex;
   flex-direction: column;
-
-  .todosContainer {
-    display: flex;
-    flex-direction: column;
-  }
 `;
 
 export const NavbarWrapper = styled.nav`
@@ -28,4 +23,14 @@ export const NavbarWrapper = styled.nav`
     font-size: 20px;
     padding: 0 10px;
   }
+`;
+
+export const TodosContainer = styled.div`
+  width: 100%;
+  padding: 10px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
 `;
