@@ -12,12 +12,21 @@ export const TodoWrapper = styled.div`
     padding-left: 10px;
     flex: 2;
     .description {
-      font-size: 12px;
+      font-size: 11px;
+      color: #505050;
     }
   }
-  .date,
-  .priority {
-    padding-right: 5px;
+  .extraInfo {
+    font-size: 13px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .date,
+    .priority {
+      padding-right: 5px;
+    }
   }
   .interactButtons {
     flex: 0.5;
