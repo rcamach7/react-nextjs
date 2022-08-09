@@ -5,7 +5,8 @@ import { useAppDispatch } from "../features/typedHooks";
 import { updateTodo, removeTodo } from "../features/todoSlice/todoSlice";
 import { TodoWrapper } from "./styled/TodoCard.styled";
 import { useState } from "react";
-import { AddTodoForm } from "./AddTodoForm";
+import { TodoForm } from "./TodoForm";
+import { formatDate } from "../utilities/utils";
 
 interface Props {
   todo: Todo;
@@ -38,7 +39,7 @@ export const TodoCard: React.FC<Props> = ({ todo }) => {
       </div>
 
       <div className="extraInfo">
-        <span className="date">{format(new Date(date), "MM/dd")}</span>
+        <span className="date">{formatDate(date)}</span>
 
         <div className="priority">
           {priority === PriorityType.Important ? (
@@ -59,10 +60,7 @@ export const TodoCard: React.FC<Props> = ({ todo }) => {
       </div>
 
       {showForm && (
-        <AddTodoForm
-          todo={todo}
-          toggleShowForm={() => setShowForm((SF) => !SF)}
-        />
+        <TodoForm todo={todo} toggleShowForm={() => setShowForm((SF) => !SF)} />
       )}
     </TodoWrapper>
   );

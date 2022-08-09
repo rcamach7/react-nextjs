@@ -10,7 +10,7 @@ interface Props {
   todo?: Todo;
 }
 
-export const AddTodoForm: React.FC<Props> = ({ toggleShowForm, todo }) => {
+export const TodoForm: React.FC<Props> = ({ toggleShowForm, todo }) => {
   const [formInput, setFormInput] = useState<TodoFormInput>({
     title: todo ? todo.title : "",
     description: todo ? todo.description : "",
