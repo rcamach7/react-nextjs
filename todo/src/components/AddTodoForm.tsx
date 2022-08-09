@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AddTodoFormWrapper } from "./styled/AddTodoForm.styled";
 import { Todo, TodoFormInput, PriorityType } from "../features/store.models";
 import { v4 } from "uuid";
@@ -78,7 +78,6 @@ export const AddTodoForm: React.FC<Props> = ({ toggleShowForm, todo }) => {
     <AddTodoFormWrapper onClick={() => toggleShowForm()}>
       <form
         onSubmit={(e) => handleSubmit(e)}
-        // Prevents any eventListeners to trigger on parent components.
         onClick={(e) => e.stopPropagation()}
       >
         <div className="title">
@@ -112,10 +111,10 @@ export const AddTodoForm: React.FC<Props> = ({ toggleShowForm, todo }) => {
           <p className="subTitle">Priority :</p>
           <select
             name="priority"
-            defaultChecked
             onChange={(e) => {
               handleSelectChange(e);
             }}
+            defaultValue={todo ? todo.priority : "normal"}
             required
           >
             <option value="normal">normal</option>

@@ -30,7 +30,7 @@ export const TodoCard: React.FC<Props> = ({ todo }) => {
         type="checkbox"
         className="checkbox"
         checked={done}
-        onClick={handleDone}
+        onChange={handleDone}
       />
       <div className="todoInfo">
         <p>{title}</p>

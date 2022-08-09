@@ -1,6 +1,6 @@
 export enum PriorityType {
-  Important = "Important",
-  Normal = "Normal",
+  Important = "important",
+  Normal = "normal",
 }
 
 export interface Todo {
