@@ -14,15 +14,4 @@ export default async function (req, res) {
       res.setHeader("Allow", ["GET", "PUT"]);
       res.status(405).end(`Method ${method} Not Allowed`);
   }
-
-  // try {
-  //   await connectMongo();
-
-  //   let user = new User({ username: "admin" });
-  //   await user.save();
-
-  //   res.json({ user });
-  // } catch (error) {
-  //   res.status(400).json({ error });
-  // }
 }

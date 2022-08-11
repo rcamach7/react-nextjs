@@ -1,5 +1,5 @@
-import { User } from "../models/User";
-import { connectMongo } from "../utils/connectMongo";
+import User from "../models/User";
+import connectMongo from "../utils/connectMongo";
 
 export const getUsers = async (req, res) => {
   try {
